@@ -1,4 +1,4 @@
-package com.nhnacademy.hexajwtauthservice.dto;
+package com.nhnacademy.hexajwtauthservice.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 
 @Getter
 @AllArgsConstructor
-public class UserResponse {
+public class Member {
     private String memberId;
     private String memberPassword;
     private String memberName;
@@ -16,7 +16,7 @@ public class UserResponse {
     private LocalDate memberBirthAt;
     private LocalDate memberCreatedAt;
     private LocalDateTime memberLastLoginAt;
-    private String memberRole;
-    private String ratingId;
-    private String statusId;
+    private Role memberRole;
+    private Rating rating;
+    private MemberStatus memberStatus;
 }

@@ -1,6 +1,6 @@
 package com.nhnacademy.hexajwtauthservice.security.details;
 
-import com.nhnacademy.hexajwtauthservice.domain.User;
+import com.nhnacademy.hexajwtauthservice.domain.Member;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -8,10 +8,10 @@ import java.util.Collection;
 import java.util.List;
 
 public class PrincipalDetails implements UserDetails {
-    private User user;
+    private Member member;
 
-    public PrincipalDetails(User user) {
-        this.user = user;
+    public PrincipalDetails(Member member) {
+        this.member = member;
     }
 
     @Override
@@ -21,11 +21,11 @@ public class PrincipalDetails implements UserDetails {
 
     @Override
     public String getPassword() {
-        return user.getPassword();
+        return member.getMemberPassword();
     }
 
     @Override
     public String getUsername() {
-        return user.getUserId();
+        return member.getMemberId();
     }
 }
