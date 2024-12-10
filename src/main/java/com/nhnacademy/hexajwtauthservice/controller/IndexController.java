@@ -1,4 +1,4 @@
-package com.nhnacademy.hexajwtauthservice.index;
+package com.nhnacademy.hexajwtauthservice.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

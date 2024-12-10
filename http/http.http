@@ -1,0 +1,11 @@
+### post login
+POST http://localhost:8100/api/auth/login
+
+{
+  "id":"testMember",
+  "password":"1234"
+}
+
+### get member test
+GET localhost:8100/api/auth/members
+X-User-ID: marco

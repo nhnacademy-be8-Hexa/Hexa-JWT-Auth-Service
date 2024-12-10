@@ -1,12 +1,14 @@
 package com.nhnacademy.hexajwtauthservice.security.details;
 
 import com.nhnacademy.hexajwtauthservice.domain.Member;
+import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 import java.util.List;
 
+@Getter
 public class PrincipalDetails implements UserDetails {
     private Member member;
 

@@ -36,9 +36,10 @@ public class SecurityConfig {
                 .and()
                 .formLogin().disable()
                 .httpBasic().disable()
+                // null 값 교체해야 할 수 도 있음
                 .addFilterAt(new JwtAuthenticationFilter(authenticationManager(null),jwtProperties,objectMapper), UsernamePasswordAuthenticationFilter.class)
                 .authorizeRequests()
-                .requestMatchers("/api/members/**").permitAll()
+//                .requestMatchers("/api/members/**").permitAll()
                 .anyRequest().permitAll();
         return http.build();
     }

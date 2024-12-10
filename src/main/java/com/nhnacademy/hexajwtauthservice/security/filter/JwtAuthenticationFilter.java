@@ -24,7 +24,6 @@ import java.util.Calendar;
 import java.util.Date;
 
 @Slf4j
-
 public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilter  {
     private final AuthenticationManager authenticationManager;
     private final JwtProperties jwtProperties;
@@ -32,9 +31,10 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
     public JwtAuthenticationFilter(AuthenticationManager authenticationManager, JwtProperties jwtProperties, ObjectMapper objectMapper) {
         super(authenticationManager);
-        this.authenticationManager=authenticationManager;
+        this.authenticationManager = authenticationManager;
         this.jwtProperties = jwtProperties;
         this.objectMapper = objectMapper;
+
         setFilterProcessesUrl(jwtProperties.getLoginUrl());
     }
 
