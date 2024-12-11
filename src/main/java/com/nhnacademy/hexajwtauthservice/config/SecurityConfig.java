@@ -2,6 +2,7 @@ package com.nhnacademy.hexajwtauthservice.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.nhnacademy.hexajwtauthservice.adapter.MemberAdapter;
+import com.nhnacademy.hexajwtauthservice.controller.AuthController;
 import com.nhnacademy.hexajwtauthservice.properties.JwtProperties;
 import com.nhnacademy.hexajwtauthservice.security.details.CustomUserDetailsService;
 import com.nhnacademy.hexajwtauthservice.security.filter.JwtAuthenticationFilter;
@@ -36,14 +37,11 @@ public class SecurityConfig {
                 .and()
                 .formLogin().disable()
                 .httpBasic().disable()
-                // null 값 교체해야 할 수 도 있음
                 .addFilterAt(new JwtAuthenticationFilter(authenticationManager(null),jwtProperties,objectMapper), UsernamePasswordAuthenticationFilter.class)
                 .authorizeRequests()
-//                .requestMatchers("/api/members/**").permitAll()
                 .anyRequest().permitAll();
         return http.build();
     }
-
 
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {

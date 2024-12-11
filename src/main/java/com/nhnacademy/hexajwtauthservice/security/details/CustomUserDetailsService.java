@@ -5,7 +5,6 @@ import com.nhnacademy.hexajwtauthservice.domain.Member;
 import com.nhnacademy.hexajwtauthservice.domain.MemberStatus;
 import com.nhnacademy.hexajwtauthservice.domain.Rating;
 import com.nhnacademy.hexajwtauthservice.domain.Role;
-import lombok.AllArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

@@ -2,7 +2,6 @@ package com.nhnacademy.hexajwtauthservice.security.filter;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.nhnacademy.hexajwtauthservice.dto.LoginRequest;
-import com.nhnacademy.hexajwtauthservice.dto.TokenResponse;
 import com.nhnacademy.hexajwtauthservice.properties.JwtProperties;
 import com.nhnacademy.hexajwtauthservice.security.details.PrincipalDetails;
 import io.jsonwebtoken.Jwts;
@@ -62,18 +61,15 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         calendar.add(Calendar.SECOND, jwtProperties.getExpirationTime() );
 
         String jwtToken = Jwts.builder()
+                .setHeaderParam("typ", jwtProperties.getTokenPrefix())
                 .claim("userId", principalDetails.getUsername())
                 .setIssuedAt(new Date())
                 .setExpiration(calendar.getTime())
                 .signWith(SignatureAlgorithm.HS256, jwtProperties.getSecret())
                 .compact();
 
-        TokenResponse tokenResponse = new TokenResponse(jwtToken, jwtProperties.getTokenPrefix(), jwtProperties.getExpirationTime());
-        ObjectMapper objectMapper = new ObjectMapper();
-        String result = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(tokenResponse);
-
         PrintWriter printWriter = response.getWriter();
-        printWriter.write(result);
+        printWriter.write(jwtToken);
         printWriter.close();
 
     }
