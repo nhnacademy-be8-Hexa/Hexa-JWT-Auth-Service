@@ -15,6 +15,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import java.io.IOException;
@@ -60,9 +61,17 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         Calendar calendar = Calendar.getInstance();
         calendar.add(Calendar.SECOND, jwtProperties.getExpirationTime() );
 
+        String role = principalDetails.getAuthorities()
+                .stream()
+                .map(GrantedAuthority::getAuthority) // 권한 이름만 추출
+                .findFirst() // 첫 번째 요소 가져오기
+                .orElse(null); // 없으면 null
+
+
         String jwtToken = Jwts.builder()
                 .setHeaderParam("typ", jwtProperties.getTokenPrefix())
                 .claim("userId", principalDetails.getUsername())
+                .claim("role", role)
                 .setIssuedAt(new Date())
                 .setExpiration(calendar.getTime())
                 .signWith(SignatureAlgorithm.HS256, jwtProperties.getSecret())

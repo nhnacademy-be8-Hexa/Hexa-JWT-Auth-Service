@@ -20,7 +20,7 @@ public class PrincipalDetails implements UserDetails {
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of(
-                new SimpleGrantedAuthority("ROLE_"+member.getMemberRole().name())
+                new SimpleGrantedAuthority("ROLE_" + member.getMemberRole().name())
         );
     }
 
