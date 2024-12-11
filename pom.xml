@@ -13,6 +13,17 @@
     <version>0.0.1-SNAPSHOT</version>
     <name>hexa-jwt-auth-service</name>
     <description>hexa-jwt-auth-service</description>
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
     <packaging>jar</packaging>
     <url/>
     <licenses>
@@ -29,6 +40,7 @@
     </scm>
     <properties>
         <java.version>21</java.version>
+        <spring-cloud.version>2024.0.0</spring-cloud.version>
     </properties>
     <dependencies>
         <dependency>
@@ -89,7 +101,10 @@
             <artifactId>spring-cloud-starter-openfeign</artifactId>
             <version>4.2.0</version>
         </dependency>
-
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+        </dependency>
 
 
     </dependencies>

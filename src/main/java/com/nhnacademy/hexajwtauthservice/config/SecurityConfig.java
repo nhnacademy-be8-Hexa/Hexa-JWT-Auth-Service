@@ -2,7 +2,6 @@ package com.nhnacademy.hexajwtauthservice.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.nhnacademy.hexajwtauthservice.adapter.MemberAdapter;
-import com.nhnacademy.hexajwtauthservice.controller.AuthController;
 import com.nhnacademy.hexajwtauthservice.properties.JwtProperties;
 import com.nhnacademy.hexajwtauthservice.security.details.CustomUserDetailsService;
 import com.nhnacademy.hexajwtauthservice.security.filter.JwtAuthenticationFilter;
