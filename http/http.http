@@ -13,27 +13,3 @@ POST http://localhost:8100/api/auth/login
   "id":"testMember",
   "password":"12345"
 }
-
-### post login
-POST http://localhost:8100/api/auth/login
-
-{
-  "id":"testMember2",
-  "password":"1234"
-}
-
-### post login
-POST http://localhost:8100/api/auth/login
-
-{
-  "id":"testMember2",
-  "password":"12345"
-}
-
-### post login
-POST http://localhost:8100/api/auth/login
-
-{
-  "id":"testMember3",
-  "password":"1234"
-}
