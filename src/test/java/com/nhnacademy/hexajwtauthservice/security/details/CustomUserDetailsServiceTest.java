@@ -30,7 +30,7 @@ class CustomUserDetailsServiceTest {
         mockMember.setMemberPassword("password123");
         mockMember.setMemberRole(Role.MEMBER);
 
-        when(memberAdapter.getMemberById("testUser")).thenReturn(mockMember);
+        when(memberAdapter.getMember("testUser")).thenReturn(mockMember);
 
         // when: loadUserByUsername 호출
         UserDetails userDetails = customUserDetailsService.loadUserByUsername("testUser");
@@ -43,13 +43,13 @@ class CustomUserDetailsServiceTest {
         assertTrue(userDetails.getAuthorities().stream().anyMatch(auth -> auth.getAuthority().equals("ROLE_MEMBER")));
 
         // MemberAdapter 호출 확인
-        verify(memberAdapter, times(1)).getMemberById("testUser");
+        verify(memberAdapter, times(1)).getMember("testUser");
     }
 
     @Test
     void loadUserByUsername_WithInvalidUsername_ShouldThrowUsernameNotFoundException() {
         // given: Mock 설정 - 사용자를 찾지 못하는 경우
-        when(memberAdapter.getMemberById("invalidUser")).thenThrow(new UsernameNotFoundException("User not found"));
+        when(memberAdapter.getMember("invalidUser")).thenThrow(new UsernameNotFoundException("User not found"));
 
         // when & then: 예외 확인
         assertThrows(UsernameNotFoundException.class, () -> {
@@ -57,6 +57,6 @@ class CustomUserDetailsServiceTest {
         });
 
         // MemberAdapter 호출 확인
-        verify(memberAdapter, times(1)).getMemberById("invalidUser");
+        verify(memberAdapter, times(1)).getMember("invalidUser");
     }
 }

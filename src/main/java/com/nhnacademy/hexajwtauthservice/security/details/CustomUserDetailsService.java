@@ -16,7 +16,7 @@ public class CustomUserDetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         // db에서 유저 가져오기 (페인 클라 어댑터)
-        return new PrincipalDetails(memberAdapter.getMemberById(username));
+        return new PrincipalDetails(memberAdapter.getMember(username));
 
     }
 }
