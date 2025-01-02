@@ -14,6 +14,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -31,14 +32,20 @@ public class SecurityConfig {
     @Bean
     @Order(Ordered.HIGHEST_PRECEDENCE)
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http.csrf().disable()
-                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                .and()
-                .formLogin().disable()
-                .httpBasic().disable()
-                .addFilterAt(new JwtAuthenticationFilter(authenticationManager(null),jwtProperties,objectMapper), UsernamePasswordAuthenticationFilter.class)
-                .authorizeRequests()
-                .anyRequest().permitAll();
+        http
+                .csrf(AbstractHttpConfigurer::disable);
+        http
+                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
+        http
+                .formLogin(AbstractHttpConfigurer::disable);
+        http
+                .httpBasic(AbstractHttpConfigurer::disable);
+        http
+                .addFilterAt(new JwtAuthenticationFilter(authenticationManager(null),jwtProperties,objectMapper), UsernamePasswordAuthenticationFilter.class);
+
+        http
+                .authorizeHttpRequests(auth->auth.anyRequest().permitAll());
+
         return http.build();
     }
 
