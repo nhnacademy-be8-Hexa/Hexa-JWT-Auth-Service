@@ -8,6 +8,7 @@ import com.nhnacademy.hexajwtauthservice.service.JwtService;
 import com.nhnacademy.hexajwtauthservice.service.RefreshTokenService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.ws.rs.BadRequestException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -34,7 +35,15 @@ public class LoginTokenController {
     public AccessRefreshTokenResponse generateAccessRefreshToken(HttpServletRequest request, HttpServletResponse response, @RequestBody LoginRequest loginrequest){
 
 
-        Member member = memberAdapter.getMember(loginrequest.getId());
+        Member member;
+
+        try {
+                member = memberAdapter.getMember(loginrequest.getId());
+        } catch (BadRequestException e) {
+            return null;
+        } catch (Exception e) {
+            return null;
+        }
 
         if(member == null || member.getMemberId()==null){
             return null;
