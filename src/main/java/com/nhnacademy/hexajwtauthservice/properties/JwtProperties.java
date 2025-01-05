@@ -10,10 +10,10 @@ import org.springframework.context.annotation.Configuration;
 @Getter
 @Setter
 public class JwtProperties {
-    private String secret;
-    private Integer expirationTime;
+    private String accessSecret;
+    private String refreshSecret;
+    private Integer accessTokenExpirationTime;
+    private Integer refreshTokenExpirationTime;
     private String tokenPrefix;
     private String headerString;
-
-    private String loginUrl;
 }
