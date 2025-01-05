@@ -9,7 +9,7 @@ import java.util.concurrent.TimeUnit;
 @Service
 public class RefreshTokenService {
 
-    private static final long EXPIRATION_TIME = 10L;
+    private static final long EXPIRATION_TIME = 30L;
 
     @Autowired
     private RedisTemplate<String, String> redisTemplate;
