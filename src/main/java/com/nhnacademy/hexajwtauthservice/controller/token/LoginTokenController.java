@@ -36,7 +36,7 @@ public class LoginTokenController {
 
         Member member = memberAdapter.getMember(loginrequest.getId());
 
-        if(member == null){
+        if(member == null || member.getMemberId()==null){
             return null;
         }
 
