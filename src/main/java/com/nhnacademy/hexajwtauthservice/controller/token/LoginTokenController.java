@@ -5,7 +5,7 @@ import com.nhnacademy.hexajwtauthservice.domain.Member;
 import com.nhnacademy.hexajwtauthservice.dto.AccessRefreshTokenResponse;
 import com.nhnacademy.hexajwtauthservice.dto.LoginRequest;
 import com.nhnacademy.hexajwtauthservice.service.JwtService;
-import com.nhnacademy.hexajwtauthservice.service.RefreshTokenService;
+import com.nhnacademy.hexajwtauthservice.service.BlackListRefreshTokenService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.ws.rs.BadRequestException;
@@ -20,13 +20,11 @@ public class LoginTokenController {
     private final MemberAdapter memberAdapter;
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
-    private final RefreshTokenService refreshTokenService;
 
-    public LoginTokenController(MemberAdapter memberAdapter, PasswordEncoder passwordEncoder, JwtService jwtService, RefreshTokenService refreshTokenService) {
+    public LoginTokenController(MemberAdapter memberAdapter, PasswordEncoder passwordEncoder, JwtService jwtService) {
         this.memberAdapter = memberAdapter;
         this.passwordEncoder = passwordEncoder;
         this.jwtService = jwtService;
-        this.refreshTokenService = refreshTokenService;
     }
 
 
@@ -54,7 +52,6 @@ public class LoginTokenController {
             String jwtAccessToken = jwtService.generateAccessToken(member.getMemberId(),member.getMemberRole().toString());
             String jwtRefreshToken = jwtService.generateRefreshToken(member.getMemberId(),member.getMemberRole().toString());
 
-            refreshTokenService.saveRefreshToken(member.getMemberId(),jwtRefreshToken);
 
             return new AccessRefreshTokenResponse(jwtAccessToken , jwtRefreshToken );
         }

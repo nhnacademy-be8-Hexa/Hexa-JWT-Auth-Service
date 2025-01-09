@@ -3,7 +3,7 @@ package com.nhnacademy.hexajwtauthservice.controller.token;
 import com.nhnacademy.hexajwtauthservice.dto.AccessRefreshTokenResponse;
 import com.nhnacademy.hexajwtauthservice.properties.JwtProperties;
 import com.nhnacademy.hexajwtauthservice.service.JwtService;
-import com.nhnacademy.hexajwtauthservice.service.RefreshTokenService;
+import com.nhnacademy.hexajwtauthservice.service.BlackListRefreshTokenService;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
@@ -11,12 +11,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class TokenController {
 
-    private final JwtProperties jwtProperties;
-    private final RefreshTokenService refreshTokenService;
+    private final BlackListRefreshTokenService refreshTokenService;
     private final JwtService jwtService;
 
-    public TokenController(JwtProperties jwtProperties, RefreshTokenService refreshTokenService) {
-        this.jwtProperties = jwtProperties;
+    public TokenController(JwtProperties jwtProperties, BlackListRefreshTokenService refreshTokenService) {;
         this.refreshTokenService = refreshTokenService;
         this.jwtService = new JwtService(jwtProperties);
     }
@@ -37,9 +35,7 @@ public class TokenController {
 
         String refreshTokenOutput = jwtService.generateRefreshToken(userId,userRole);
 
-        refreshTokenService.deleteRefreshToken(userId);
-
-        refreshTokenService.saveRefreshToken(userId,refreshTokenOutput);
+        refreshTokenService.addToBlackList(refreshToken);
 
         return new AccessRefreshTokenResponse(accessTokenOutput,refreshTokenOutput);
     }

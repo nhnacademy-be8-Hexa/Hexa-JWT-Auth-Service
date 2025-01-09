@@ -90,4 +90,19 @@ public class JwtService {
         return claims.get("role", String.class);
     }
 
+    /**
+     * 만료시간에서 현재시간 차감한 시간 반환
+     */
+    public long extractRestExpirationTime(String refreshToken) {
+        Claims claims = Jwts.parserBuilder()
+                .setSigningKey(jwtProperties.getRefreshSecret())  // JWT 서명에 사용된 비밀키를 넣어야 합니다.
+                .build()
+                .parseClaimsJws(refreshToken)
+                .getBody();
+
+        // 토큰의 exp 필드에서 만료 시간을 추출 (단위: milliseconds)
+        Date expiration = claims.getExpiration();
+        return expiration.getTime() - System.currentTimeMillis();
+    }
+
 }
