@@ -2,11 +2,13 @@ package com.nhnacademy.hexajwtauthservice.credentials;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.HashMap;
 import java.util.Map;
 
 
+@Slf4j
 public class DatabaseCredentials {
 
     private Map<String, String> credentialsMap = new HashMap<>();
@@ -27,7 +29,7 @@ public class DatabaseCredentials {
                 credentialsMap.put(field.getKey(), field.getValue().asText());
             });
         } catch (Exception e) {
-            e.printStackTrace(); // 예외 처리 (파일 읽기 오류나 잘못된 JSON 등)
+            log.error("JSON 변환 중 에러 발생: {}",e.getMessage(),e);
         }
     }
 
