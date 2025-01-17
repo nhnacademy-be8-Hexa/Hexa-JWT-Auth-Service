@@ -1,0 +1,22 @@
+= TokenController API Documentation
+:toc:
+:toclevels: 2
+:sectanchors:
+:sectnums:
+
+== 토큰 재발급 (Access, Refresh Token)
+
+### 요청
+
+include::{snippets}/reissue-token/http-request.adoc[]
+
+
+
+### 응답 필드
+
+include::{snippets}/reissue-token/response-fields.adoc[]
+
+### 응답
+
+include::{snippets}/reissue-token/response-body.adoc[]
+
