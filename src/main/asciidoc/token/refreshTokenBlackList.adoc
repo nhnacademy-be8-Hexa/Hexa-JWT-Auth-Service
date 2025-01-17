@@ -1,0 +1,52 @@
+= RedisBlackListRefreshTokenController API Documentation
+:toc:
+:toclevels: 2
+:sectanchors:
+:sectnums:
+
+== Refresh Token 블랙리스트 추가
+
+### 요청
+
+include::{snippets}/add-to-blacklist/http-request.adoc[]
+
+
+### 헤더 필드
+
+include::{snippets}/add-to-blacklist/request-headers.adoc[]
+
+### 응답
+
+없음
+
+
+
+== Refresh Token이 블랙리스트에 있는지 확인 (True , False)
+
+### 요청
+
+include::{snippets}/check-blacklisted-token/http-request.adoc[]
+
+### 필드
+
+include::{snippets}/check-blacklisted-token/request-headers.adoc[]
+
+### 응답
+
+있으면 True , 없으면 False
+
+== Refresh Token 블랙리스트 삭제
+
+### 요청
+
+include::{snippets}/remove-from-blacklist/http-request.adoc[]
+
+
+### 필드
+
+include::{snippets}/remove-from-blacklist/request-headers.adoc[]
+
+### 예제 응답
+
+없음
+

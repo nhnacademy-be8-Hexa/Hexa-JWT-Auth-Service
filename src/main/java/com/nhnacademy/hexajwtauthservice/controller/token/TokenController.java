@@ -14,9 +14,9 @@ public class TokenController {
     private final BlackListRefreshTokenService refreshTokenService;
     private final JwtService jwtService;
 
-    public TokenController(JwtProperties jwtProperties, BlackListRefreshTokenService refreshTokenService) {;
+    public TokenController(JwtService jwtService, BlackListRefreshTokenService refreshTokenService) {;
         this.refreshTokenService = refreshTokenService;
-        this.jwtService = new JwtService(jwtProperties);
+        this.jwtService = jwtService;
     }
 
     // 접근 토큰 및 리프레시 토큰 재 발급

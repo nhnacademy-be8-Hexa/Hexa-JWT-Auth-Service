@@ -5,7 +5,6 @@ import com.nhnacademy.hexajwtauthservice.domain.Member;
 import com.nhnacademy.hexajwtauthservice.dto.AccessRefreshTokenResponse;
 import com.nhnacademy.hexajwtauthservice.dto.LoginRequest;
 import com.nhnacademy.hexajwtauthservice.service.JwtService;
-import com.nhnacademy.hexajwtauthservice.service.BlackListRefreshTokenService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.ws.rs.BadRequestException;
